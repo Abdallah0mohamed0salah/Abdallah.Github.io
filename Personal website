@@ -1,1 +1,725 @@
-. 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Abdullah Salah — CS Student & AI Enthusiast</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #F8F9FA;
+      --surface: #FFFFFF;
+      --border: #E5E7EB;
+      --text-primary: #111827;
+      --text-secondary: #6B7280;
+      --text-muted: #9CA3AF;
+      --accent: #2563EB;
+      --accent-light: #EFF6FF;
+      --accent-soft: #DBEAFE;
+      --mono: 'JetBrains Mono', monospace;
+      --sans: 'Inter', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--sans);
+      background: var(--bg);
+      color: var(--text-primary);
+      line-height: 1.6;
+      font-size: 15px;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0;
+      background: rgba(248,249,250,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      z-index: 100;
+      padding: 0 2rem;
+    }
+    .nav-inner {
+      max-width: 900px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 60px;
+    }
+    .nav-logo {
+      font-family: var(--mono);
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--accent);
+      letter-spacing: 0.02em;
+      text-decoration: none;
+    }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      font-size: 13px; font-weight: 500;
+      color: var(--text-secondary);
+      text-decoration: none;
+      letter-spacing: 0.02em;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--accent); }
+
+    /* ── SECTIONS ── */
+    section {
+      max-width: 900px; margin: 0 auto;
+      padding: 5rem 2rem;
+    }
+    section:first-of-type { padding-top: 7rem; }
+
+    .section-label {
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--accent);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 0.75rem;
+    }
+    h2 {
+      font-size: 2rem;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      color: var(--text-primary);
+      margin-bottom: 0.5rem;
+    }
+    .section-divider {
+      width: 40px; height: 3px;
+      background: var(--accent);
+      border-radius: 2px;
+      margin-bottom: 2.5rem;
+    }
+
+    /* ── HERO ── */
+    #hero {
+      padding-top: 9rem;
+      padding-bottom: 5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .hero-eyebrow {
+      font-family: var(--mono);
+      font-size: 13px;
+      color: var(--accent);
+      margin-bottom: 1.25rem;
+      display: flex; align-items: center; gap: 0.5rem;
+    }
+    .hero-eyebrow::before {
+      content: '';
+      display: inline-block;
+      width: 20px; height: 2px;
+      background: var(--accent);
+    }
+    h1 {
+      font-size: clamp(2.4rem, 6vw, 3.6rem);
+      font-weight: 700;
+      letter-spacing: -0.04em;
+      line-height: 1.1;
+      margin-bottom: 1.25rem;
+      color: var(--text-primary);
+    }
+    h1 span { color: var(--accent); }
+    .hero-sub {
+      font-size: 1.05rem;
+      color: var(--text-secondary);
+      max-width: 520px;
+      margin-bottom: 2rem;
+      line-height: 1.7;
+    }
+    .hero-ctas { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .btn-primary {
+      background: var(--accent);
+      color: #fff;
+      padding: 0.65rem 1.5rem;
+      border-radius: 6px;
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      transition: background 0.2s, transform 0.15s;
+      display: inline-flex; align-items: center; gap: 0.4rem;
+    }
+    .btn-primary:hover { background: #1d4ed8; transform: translateY(-1px); }
+    .btn-outline {
+      border: 1.5px solid var(--border);
+      color: var(--text-primary);
+      padding: 0.65rem 1.5rem;
+      border-radius: 6px;
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      transition: border-color 0.2s, transform 0.15s;
+      display: inline-flex; align-items: center; gap: 0.4rem;
+    }
+    .btn-outline:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-1px); }
+
+    /* ── ABOUT ── */
+    #about { border-bottom: 1px solid var(--border); }
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+    }
+    .about-text p {
+      color: var(--text-secondary);
+      line-height: 1.8;
+      margin-bottom: 1rem;
+    }
+    .about-facts { display: flex; flex-direction: column; gap: 1rem; }
+    .fact-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1rem 1.25rem;
+      display: flex; align-items: flex-start; gap: 0.75rem;
+    }
+    .fact-icon { font-size: 1.2rem; }
+    .fact-label { font-size: 11px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 2px; }
+    .fact-value { font-size: 14px; font-weight: 500; color: var(--text-primary); }
+
+    /* ── SKILLS ── */
+    #skills { border-bottom: 1px solid var(--border); }
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 1.25rem;
+    }
+    .skill-category {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.5rem;
+    }
+    .skill-cat-title {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1rem;
+      font-family: var(--mono);
+    }
+    .skill-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+    .skill-tag {
+      background: var(--accent-light);
+      color: var(--accent);
+      font-size: 12px;
+      font-weight: 500;
+      padding: 0.3rem 0.7rem;
+      border-radius: 4px;
+      font-family: var(--mono);
+    }
+
+    /* ── PROJECTS ── */
+    #projects { border-bottom: 1px solid var(--border); }
+    .projects-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
+    .project-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.75rem;
+      transition: border-color 0.2s, transform 0.2s;
+      position: relative;
+      overflow: hidden;
+    }
+    .project-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0;
+      height: 3px;
+      background: var(--accent);
+      transform: scaleX(0); transform-origin: left;
+      transition: transform 0.3s;
+    }
+    .project-card:hover { border-color: var(--accent-soft); transform: translateY(-2px); }
+    .project-card:hover::before { transform: scaleX(1); }
+    .project-num {
+      font-family: var(--mono); font-size: 11px;
+      color: var(--text-muted); margin-bottom: 0.75rem;
+    }
+    .project-title { font-size: 1rem; font-weight: 600; margin-bottom: 0.5rem; }
+    .project-desc { font-size: 13px; color: var(--text-secondary); line-height: 1.7; margin-bottom: 1rem; }
+    .project-stack { display: flex; flex-wrap: wrap; gap: 0.35rem; }
+    .stack-tag {
+      font-family: var(--mono); font-size: 11px;
+      background: var(--bg); color: var(--text-secondary);
+      border: 1px solid var(--border);
+      padding: 0.2rem 0.55rem; border-radius: 3px;
+    }
+
+    /* ── CV ── */
+    #cv { border-bottom: 1px solid var(--border); }
+    .cv-wrapper {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    .cv-header {
+      background: var(--accent);
+      color: white;
+      padding: 2.5rem;
+    }
+    .cv-name { font-size: 1.75rem; font-weight: 700; letter-spacing: -0.03em; margin-bottom: 0.25rem; }
+    .cv-title { font-size: 14px; opacity: 0.85; font-weight: 400; }
+    .cv-body { padding: 2rem 2.5rem; }
+    .cv-section { margin-bottom: 2rem; }
+    .cv-section-title {
+      font-family: var(--mono); font-size: 11px; font-weight: 700;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 0.75rem;
+      padding-bottom: 0.4rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .cv-text { font-size: 14px; color: var(--text-secondary); line-height: 1.7; }
+    .cv-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.5rem; }
+    .cv-tag {
+      background: var(--bg); border: 1px solid var(--border);
+      font-family: var(--mono); font-size: 11px;
+      padding: 0.25rem 0.6rem; border-radius: 4px; color: var(--text-primary);
+    }
+    .cv-download {
+      padding: 1.5rem 2.5rem;
+      border-top: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .cv-download-note { font-size: 13px; color: var(--text-muted); }
+
+    /* ── BLOG ── */
+    #blog { border-bottom: 1px solid var(--border); }
+    .blog-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1.25rem; }
+    .blog-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.5rem;
+      transition: border-color 0.2s, transform 0.2s;
+      cursor: default;
+    }
+    .blog-card:hover { border-color: var(--accent-soft); transform: translateY(-2px); }
+    .blog-date { font-family: var(--mono); font-size: 11px; color: var(--text-muted); margin-bottom: 0.75rem; }
+    .blog-title { font-size: 15px; font-weight: 600; line-height: 1.4; margin-bottom: 0.6rem; color: var(--text-primary); }
+    .blog-excerpt { font-size: 13px; color: var(--text-secondary); line-height: 1.7; }
+    .blog-tag {
+      display: inline-block; margin-top: 1rem;
+      font-family: var(--mono); font-size: 11px;
+      color: var(--accent); background: var(--accent-light);
+      padding: 0.2rem 0.55rem; border-radius: 3px;
+    }
+    .blog-coming {
+      text-align: center;
+      padding: 3rem;
+      background: var(--surface);
+      border: 1px dashed var(--border);
+      border-radius: 10px;
+      color: var(--text-muted);
+      font-size: 14px;
+    }
+
+    /* ── CONTACT ── */
+    #contact {}
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+    .contact-left p { color: var(--text-secondary); line-height: 1.8; margin-bottom: 1.5rem; font-size: 15px; }
+    .contact-link {
+      display: flex; align-items: center; gap: 0.75rem;
+      text-decoration: none;
+      color: var(--text-primary);
+      font-size: 14px; font-weight: 500;
+      padding: 0.85rem 1rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      margin-bottom: 0.75rem;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .contact-link:hover { border-color: var(--accent); color: var(--accent); }
+    .contact-link-icon { font-size: 1.1rem; }
+    .contact-link-label { font-size: 11px; color: var(--text-muted); display: block; }
+    .contact-link-value { font-size: 13px; }
+
+    /* contact form */
+    .contact-form { display: flex; flex-direction: column; gap: 1rem; }
+    .form-group { display: flex; flex-direction: column; gap: 0.35rem; }
+    label { font-size: 12px; font-weight: 600; color: var(--text-secondary); letter-spacing: 0.04em; }
+    input, textarea {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 7px;
+      padding: 0.7rem 0.9rem;
+      font-family: var(--sans);
+      font-size: 14px;
+      color: var(--text-primary);
+      outline: none;
+      transition: border-color 0.2s;
+      resize: none;
+    }
+    input:focus, textarea:focus { border-color: var(--accent); }
+    textarea { min-height: 110px; }
+    .form-submit {
+      background: var(--accent); color: white;
+      border: none; border-radius: 7px;
+      padding: 0.75rem 1.5rem;
+      font-size: 13px; font-weight: 600;
+      cursor: pointer;
+      font-family: var(--sans);
+      letter-spacing: 0.02em;
+      transition: background 0.2s;
+      align-self: flex-start;
+    }
+    .form-submit:hover { background: #1d4ed8; }
+    .form-success {
+      display: none;
+      color: #16a34a;
+      font-size: 13px;
+      font-weight: 500;
+      padding: 0.6rem 1rem;
+      background: #f0fdf4;
+      border: 1px solid #bbf7d0;
+      border-radius: 6px;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2rem;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 12px;
+      font-family: var(--mono);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 700px) {
+      .about-grid, .projects-grid, .contact-grid, .blog-grid { grid-template-columns: 1fr; }
+      h1 { font-size: 2.2rem; }
+      h2 { font-size: 1.6rem; }
+      .cv-header { padding: 1.75rem; }
+      .cv-body { padding: 1.5rem; }
+      .cv-download { flex-direction: column; align-items: flex-start; gap: 1rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-inner">
+      <a class="nav-logo" href="#hero">abdullah.dev</a>
+      <ul class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#cv">CV</a></li>
+        <li><a href="#blog">Blog</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-eyebrow">CS Student @ CIC Cairo</div>
+    <h1>Abdullah<br><span>Salah</span></h1>
+    <p class="hero-sub">
+      Aspiring AI &amp; Cybersecurity specialist. Building skills in Python, C++,
+      full-stack development, and competitive programming — one problem at a time.
+    </p>
+    <div class="hero-ctas">
+      <a href="#contact" class="btn-primary">Get in touch →</a>
+      <a href="#cv" class="btn-outline">View CV</a>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="section-label">01 — About</div>
+    <h2>Who I am</h2>
+    <div class="section-divider"></div>
+    <div class="about-grid">
+      <div class="about-text">
+        <p>
+          I'm a second-year Computer Science student at the Canadian International College (CIC),
+          Faculty of Computers and Information. I'm passionate about understanding how technology
+          works at a deep level — from algorithms to AI systems to network security.
+        </p>
+        <p>
+          My goal is to become a specialist in Artificial Intelligence and Cybersecurity,
+          combining strong programming fundamentals with a security-first mindset. I enjoy
+          tackling complex problems and continuously learning new tools and techniques.
+        </p>
+        <p>
+          Outside of coursework, I practice competitive programming and explore web development
+          projects to keep my skills sharp and practical.
+        </p>
+      </div>
+      <div class="about-facts">
+        <div class="fact-card">
+          <div class="fact-icon">🎓</div>
+          <div>
+            <div class="fact-label">Education</div>
+            <div class="fact-value">CIC Cairo — Computer Science</div>
+          </div>
+        </div>
+        <div class="fact-card">
+          <div class="fact-icon">📍</div>
+          <div>
+            <div class="fact-label">Location</div>
+            <div class="fact-value">Cairo, Egypt</div>
+          </div>
+        </div>
+        <div class="fact-card">
+          <div class="fact-icon">🎯</div>
+          <div>
+            <div class="fact-label">Focus Areas</div>
+            <div class="fact-value">AI · Cybersecurity · Full-Stack</div>
+          </div>
+        </div>
+        <div class="fact-card">
+          <div class="fact-icon">🌐</div>
+          <div>
+            <div class="fact-label">Languages</div>
+            <div class="fact-value">Arabic (Native) · English (Intermediate)</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills">
+    <div class="section-label">02 — Skills</div>
+    <h2>What I work with</h2>
+    <div class="section-divider"></div>
+    <div class="skills-grid">
+      <div class="skill-category">
+        <div class="skill-cat-title">Languages</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Python</span>
+          <span class="skill-tag">C++</span>
+          <span class="skill-tag">HTML</span>
+          <span class="skill-tag">CSS</span>
+        </div>
+      </div>
+      <div class="skill-category">
+        <div class="skill-cat-title">Domains</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Artificial Intelligence</span>
+          <span class="skill-tag">Cybersecurity</span>
+          <span class="skill-tag">Full-Stack Dev</span>
+        </div>
+      </div>
+      <div class="skill-category">
+        <div class="skill-cat-title">Problem Solving</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Competitive Programming</span>
+          <span class="skill-tag">Algorithms</span>
+          <span class="skill-tag">Data Structures</span>
+        </div>
+      </div>
+      <div class="skill-category">
+        <div class="skill-cat-title">Soft Skills</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Analytical Thinking</span>
+          <span class="skill-tag">Teamwork</span>
+          <span class="skill-tag">Time Management</span>
+          <span class="skill-tag">Continuous Learning</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects">
+    <div class="section-label">03 — Projects</div>
+    <h2>Things I've built</h2>
+    <div class="section-divider"></div>
+    <div class="projects-grid">
+      <div class="project-card">
+        <div class="project-num">01</div>
+        <div class="project-title">Algorithm Challenges</div>
+        <div class="project-desc">A collection of competitive programming solutions covering sorting, dynamic programming, graph traversal, and more.</div>
+        <div class="project-stack">
+          <span class="stack-tag">C++</span>
+          <span class="stack-tag">Algorithms</span>
+        </div>
+      </div>
+      <div class="project-card">
+        <div class="project-num">02</div>
+        <div class="project-title">Web Development Practice</div>
+        <div class="project-desc">Frontend and full-stack practice projects exploring responsive design, DOM manipulation, and layout systems.</div>
+        <div class="project-stack">
+          <span class="stack-tag">HTML</span>
+          <span class="stack-tag">CSS</span>
+          <span class="stack-tag">JavaScript</span>
+        </div>
+      </div>
+      <div class="project-card">
+        <div class="project-num">03</div>
+        <div class="project-title">Python Automation Scripts</div>
+        <div class="project-desc">Utility scripts for automating repetitive tasks and exploring Python's standard library capabilities.</div>
+        <div class="project-stack">
+          <span class="stack-tag">Python</span>
+          <span class="stack-tag">Automation</span>
+        </div>
+      </div>
+      <div class="project-card">
+        <div class="project-num">04</div>
+        <div class="project-title">Academic CS Assignments</div>
+        <div class="project-desc">Coursework projects covering data structures, systems analysis &amp; design, OOP principles, and software engineering concepts.</div>
+        <div class="project-stack">
+          <span class="stack-tag">C++</span>
+          <span class="stack-tag">Python</span>
+          <span class="stack-tag">UML</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CV -->
+  <section id="cv">
+    <div class="section-label">04 — CV</div>
+    <h2>Curriculum Vitae</h2>
+    <div class="section-divider"></div>
+    <div class="cv-wrapper">
+      <div class="cv-header">
+        <div class="cv-name">Abdullah Salah</div>
+        <div class="cv-title">Computer Science Student · Aspiring AI &amp; Cybersecurity Specialist</div>
+      </div>
+      <div class="cv-body">
+        <div class="cv-section">
+          <div class="cv-section-title">Professional Summary</div>
+          <div class="cv-text">Second-year Computer Science student passionate about programming, AI, cybersecurity, problem solving, Python, C++, and web development.</div>
+        </div>
+        <div class="cv-section">
+          <div class="cv-section-title">Education</div>
+          <div class="cv-text">Canadian International College (CIC) — Faculty of Computers and Information</div>
+        </div>
+        <div class="cv-section">
+          <div class="cv-section-title">Technical Skills</div>
+          <div class="cv-tags">
+            <span class="cv-tag">Python</span>
+            <span class="cv-tag">C++</span>
+            <span class="cv-tag">HTML</span>
+            <span class="cv-tag">CSS</span>
+            <span class="cv-tag">AI</span>
+            <span class="cv-tag">Cybersecurity</span>
+            <span class="cv-tag">Full-Stack Development</span>
+            <span class="cv-tag">Competitive Programming</span>
+          </div>
+        </div>
+        <div class="cv-section">
+          <div class="cv-section-title">Projects</div>
+          <div class="cv-text">Academic programming assignments, web development practice, and algorithm/problem-solving exercises.</div>
+        </div>
+        <div class="cv-section">
+          <div class="cv-section-title">Languages</div>
+          <div class="cv-text">Arabic (Native) · English (Intermediate)</div>
+        </div>
+        <div class="cv-section">
+          <div class="cv-section-title">Soft Skills</div>
+          <div class="cv-tags">
+            <span class="cv-tag">Problem Solving</span>
+            <span class="cv-tag">Analytical Thinking</span>
+            <span class="cv-tag">Teamwork</span>
+            <span class="cv-tag">Continuous Learning</span>
+            <span class="cv-tag">Time Management</span>
+          </div>
+        </div>
+      </div>
+      <div class="cv-download">
+        <span class="cv-download-note">Full CV available as a Word document</span>
+        <a href="Abdullah_Salah_CV.docx" download class="btn-primary">⬇ Download CV</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- BLOG -->
+  <section id="blog">
+    <div class="section-label">05 — Blog</div>
+    <h2>Thoughts &amp; notes</h2>
+    <div class="section-divider"></div>
+    <div class="blog-coming">
+      ✍️ &nbsp; Blog posts coming soon — I'll be writing about AI, cybersecurity, competitive programming, and student life at CIC.
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="section-label">06 — Contact</div>
+    <h2>Get in touch</h2>
+    <div class="section-divider"></div>
+    <div class="contact-grid">
+      <div class="contact-left">
+        <p>Whether you want to collaborate on a project, talk tech, or just say hello — I'd love to hear from you.</p>
+        <a href="mailto:abdallahmohamedsalah1234@gmail.com" class="contact-link">
+          <span class="contact-link-icon">✉️</span>
+          <div>
+            <span class="contact-link-label">Email</span>
+            <span class="contact-link-value">abdallahmohamedsalah1234@gmail.com</span>
+          </div>
+        </a>
+        <a href="https://www.linkedin.com/in/abdallah-salah-4ab9ba1b4" target="_blank" rel="noopener" class="contact-link">
+          <span class="contact-link-icon">💼</span>
+          <div>
+            <span class="contact-link-label">LinkedIn</span>
+            <span class="contact-link-value">Abdallah Salah</span>
+          </div>
+        </a>
+      </div>
+      <div>
+        <div class="contact-form">
+          <div class="form-group">
+            <label>Your name</label>
+            <input type="text" id="f-name" placeholder="Ahmed Mohamed" />
+          </div>
+          <div class="form-group">
+            <label>Your email</label>
+            <input type="email" id="f-email" placeholder="ahmed@example.com" />
+          </div>
+          <div class="form-group">
+            <label>Message</label>
+            <textarea id="f-msg" placeholder="Hi Abdullah, I'd love to..."></textarea>
+          </div>
+          <button class="form-submit" onclick="handleForm()">Send message</button>
+          <div class="form-success" id="form-success">✓ Thanks! I'll get back to you soon.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <span>© 2026 Abdullah Salah · Built with care</span>
+  </footer>
+
+  <script>
+    function handleForm() {
+      const name = document.getElementById('f-name').value.trim();
+      const email = document.getElementById('f-email').value.trim();
+      const msg = document.getElementById('f-msg').value.trim();
+      if (!name || !email || !msg) { alert('Please fill in all fields.'); return; }
+      document.getElementById('form-success').style.display = 'block';
+      document.getElementById('f-name').value = '';
+      document.getElementById('f-email').value = '';
+      document.getElementById('f-msg').value = '';
+    }
+
+    // Smooth active nav highlight
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.nav-links a');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          navLinks.forEach(l => l.style.color = '');
+          const active = document.querySelector(`.nav-links a[href="#${e.target.id}"]`);
+          if (active) active.style.color = 'var(--accent)';
+        }
+      });
+    }, { threshold: 0.4 });
+    sections.forEach(s => observer.observe(s));
+  </script>
+</body>
+</html>
